@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch List</title>
+<meta name="description" content="Track every movie & TV show you watch. Rate them, build your Top 5, unlock achievements, avatars and journeys. Free on iOS & Android.">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:title" content="Watch List">
+<meta property="og:description" content="Every movie & show, one list. Free on iOS & Android.">
+<meta property="og:image" content="https://sylv42240.github.io/watchlist/banner.png">
+<meta property="og:url" content="https://sylv42240.github.io/watchlist/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Watch_List_App">
+<script>
+  // Phones go straight to their store; desktops see both buttons.
+  var ua = navigator.userAgent;
+  var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (ios) location.replace("https://apps.apple.com/app/id1641134141");
+  else if (/Android/.test(ua)) location.replace("https://play.google.com/store/apps/details?id=com.sylv42240.watch_list");
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh; display: grid; place-items: center; padding: 32px 16px;
+    font-family: Outfit, system-ui, sans-serif; color: #f4f4f6; text-align: center;
+    background:
+      radial-gradient(600px 420px at 50% 30%, rgba(251,179,59,0.16), transparent 70%),
+      linear-gradient(160deg, #2b2c34, #1c1d22 55%, #17181c) fixed;
+  }
+  img { width: 150px; max-width: 40vw; filter: drop-shadow(0 0 40px rgba(251,179,59,0.35)); }
+  .name { margin-top: 28px; font-size: 40px; font-weight: 800; letter-spacing: 1.5px; }
+  .name b, h1 span { color: #fbb33b; }
+  h1 { margin-top: 18px; font-size: clamp(30px, 6vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
+  p { margin: 14px auto 0; max-width: 520px; font-size: 19px; font-weight: 500; color: #a3a4ad; }
+  .stores { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  a {
+    min-width: 190px; padding: 14px 24px; border-radius: 999px; font-size: 18px; font-weight: 600;
+    color: #1c1d22; text-decoration: none; background: linear-gradient(145deg, #ffc65e, #f5a01e);
+    box-shadow: 0 8px 22px rgba(251,179,59,0.3); transition: transform .15s;
+  }
+  a.alt { color: #f4f4f6; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); box-shadow: none; }
+  a:hover { transform: translateY(-2px); }
+  footer { margin-top: 40px; font-size: 15px; color: #6f7079; }
+  footer a { all: unset; cursor: pointer; color: #a3a4ad; }
+</style>
+</head>
+<body>
+  <main>
+    <img src="logo.png" alt="Watch List logo">
+    <div class="name"><b>WATCH</b> LIST</div>
+    <h1>Every movie &amp; show, <span>one list.</span></h1>
+    <p>Track what you watch, rate it, unlock achievements and journeys.</p>
+    <div class="stores">
+      <a href="https://apps.apple.com/app/id1641134141">App Store</a>
+      <a class="alt" href="https://play.google.com/store/apps/details?id=com.sylv42240.watch_list">Google Play</a>
+    </div>
+    <footer><a href="https://twitter.com/Watch_List_App">@Watch_List_App</a></footer>
+  </main>
+</body>
+</html>
