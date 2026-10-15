@@ -1,65 +1,355 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Watch List</title>
-<meta name="description" content="Track every movie & TV show you watch. Rate them, build your Top 5, unlock achievements, avatars and journeys. Free on iOS & Android.">
+<meta name="description" content="Suivez tous les films et séries que vous regardez. Notez-les, classez votre Top 5, débloquez succès, avatars et parcours. Gratuit sur iOS et Android.">
+<meta name="theme-color" content="#1c1d22">
+<meta name="apple-itunes-app" content="app-id=1641134141">
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <meta property="og:title" content="Watch List">
-<meta property="og:description" content="Every movie & show, one list. Free on iOS & Android.">
+<meta property="og:description" content="Tous vos films et séries, une seule liste. Gratuit sur iOS et Android.">
 <meta property="og:image" content="https://sylv42240.github.io/watchlist/banner.png">
 <meta property="og:url" content="https://sylv42240.github.io/watchlist/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Watch_List_App">
-<script>
-  // Phones go straight to their store; desktops see both buttons.
-  var ua = navigator.userAgent;
-  var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  if (ios) location.replace("https://apps.apple.com/app/id1641134141");
-  else if (/Android/.test(ua)) location.replace("https://play.google.com/store/apps/details?id=com.sylv42240.watch_list");
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; box-sizing: border-box; }
+  :root {
+    --bg: #1c1d22; --card: rgba(255,255,255,0.045); --line: rgba(255,255,255,0.09);
+    --text: #f4f4f6; --muted: #a3a4ad; --dim: #6f7079; --accent: #fbb33b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
   body {
-    min-height: 100vh; display: grid; place-items: center; padding: 32px 16px;
-    font-family: Outfit, system-ui, sans-serif; color: #f4f4f6; text-align: center;
+    font-family: Outfit, system-ui, sans-serif; color: var(--text); line-height: 1.5;
     background:
-      radial-gradient(600px 420px at 50% 30%, rgba(251,179,59,0.16), transparent 70%),
-      linear-gradient(160deg, #2b2c34, #1c1d22 55%, #17181c) fixed;
+      radial-gradient(700px 480px at 50% 0, rgba(251,179,59,0.16), transparent 70%),
+      linear-gradient(160deg, #2b2c34, var(--bg) 40%, #17181c);
+    background-color: var(--bg);
   }
-  img { width: 150px; max-width: 40vw; filter: drop-shadow(0 0 40px rgba(251,179,59,0.35)); }
-  .name { margin-top: 28px; font-size: 40px; font-weight: 800; letter-spacing: 1.5px; }
-  .name b, h1 span { color: #fbb33b; }
-  h1 { margin-top: 18px; font-size: clamp(30px, 6vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
-  p { margin: 14px auto 0; max-width: 520px; font-size: 19px; font-weight: 500; color: #a3a4ad; }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+  nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); background: rgba(28,29,34,0.72); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; gap: 22px; height: 60px; }
+  .brand { font-weight: 800; letter-spacing: 1px; text-decoration: none; margin-right: auto; white-space: nowrap; }
+  .brand b, h1 span, h2 span { color: var(--accent); }
+  nav a:not(.brand) { color: var(--muted); text-decoration: none; font-weight: 500; }
+  nav a:not(.brand):hover { color: var(--text); }
+
+  .hero { text-align: center; padding: 64px 16px 40px; }
+  .hero img { width: 150px; max-width: 40vw; filter: drop-shadow(0 0 40px rgba(251,179,59,0.35)); }
+  h1 { margin-top: 22px; font-size: clamp(34px, 7vw, 58px); font-weight: 800; line-height: 1.05; letter-spacing: -1px; }
+  .lead { margin: 16px auto 0; max-width: 560px; font-size: 20px; color: var(--muted); }
   .stores { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  a {
-    min-width: 190px; padding: 14px 24px; border-radius: 999px; font-size: 18px; font-weight: 600;
-    color: #1c1d22; text-decoration: none; background: linear-gradient(145deg, #ffc65e, #f5a01e);
-    box-shadow: 0 8px 22px rgba(251,179,59,0.3); transition: transform .15s;
+  .btn {
+    min-width: 190px; padding: 14px 24px; border-radius: 999px; font-size: 18px; font-weight: 600; text-decoration: none;
+    color: #1c1d22; background: linear-gradient(145deg, #ffc65e, #f5a01e); box-shadow: 0 8px 22px rgba(251,179,59,0.3); transition: transform .15s;
   }
-  a.alt { color: #f4f4f6; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); box-shadow: none; }
-  a:hover { transform: translateY(-2px); }
-  footer { margin-top: 40px; font-size: 15px; color: #6f7079; }
-  footer a { all: unset; cursor: pointer; color: #a3a4ad; }
+  .btn:hover { transform: translateY(-2px); }
+  .facts {
+    margin: 44px auto 0; max-width: 760px; display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+  }
+  .facts div { padding: 20px 12px; display: grid; justify-items: center; gap: 2px; }
+  .facts div + div { border-left: 1px solid var(--line); }
+  .facts svg { width: 20px; height: 20px; color: var(--accent); margin-bottom: 6px; }
+  .facts b { font-size: 26px; font-weight: 800; line-height: 1.1; }
+  .facts span { font-size: 14px; color: var(--muted); }
+
+  section { padding: 56px 0; }
+  h2 { font-size: clamp(28px, 5vw, 38px); font-weight: 800; letter-spacing: -0.5px; text-align: center; }
+  .sub { text-align: center; color: var(--muted); margin: 8px auto 32px; max-width: 560px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+  .card .ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; color: var(--accent); background: rgba(251,179,59,0.14); }
+  .ico svg { width: 22px; height: 22px; }
+  .card h3 { margin-top: 14px; font-size: 19px; font-weight: 600; }
+  .card p { margin-top: 6px; color: var(--muted); }
+
+  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .chips span { padding: 8px 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+
+  .changes { max-width: 760px; }
+  .release { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px 24px; margin-bottom: 14px; }
+  .release .head, .release summary { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .release summary { cursor: pointer; list-style: none; }
+  .release summary::-webkit-details-marker { display: none; }
+  .release summary::after { content: "+"; margin-left: auto; color: var(--dim); font-size: 22px; line-height: 1; }
+  .release[open] summary::after { content: "–"; }
+  .release h3 { font-size: 22px; font-weight: 800; }
+  .release time { color: var(--dim); }
+  .tag { font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; color: #1c1d22; background: var(--accent); }
+  .release ul { margin-top: 12px; padding-left: 20px; color: var(--muted); }
+  .release li { margin-top: 4px; }
+  .release li::marker { color: var(--accent); }
+  .history { margin-top: 36px; }
+  .history h3 { text-align: center; font-size: 20px; margin-bottom: 18px; }
+  .year { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .year b { color: var(--accent); font-size: 18px; }
+  .year p { color: var(--muted); }
+
+  .faq { max-width: 760px; }
+  .faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 18px; }
+  .faq p { margin-top: 8px; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--dim); font-size: 15px; text-align: center; }
+  footer .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 600px) {
+    nav a.opt { display: none; }
+    .hero { padding-top: 40px; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts div:nth-child(3) { border-left: 0; }
+    .facts div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .facts b { font-size: 22px; }
+    .release { padding: 18px; }
+  }
 </style>
 </head>
 <body>
-  <main>
-    <img src="logo.png" alt="Watch List logo">
-    <div class="name"><b>WATCH</b> LIST</div>
-    <h1>Every movie &amp; show, <span>one list.</span></h1>
-    <p>Track what you watch, rate it, unlock achievements and journeys.</p>
-    <div class="stores">
-      <a href="https://apps.apple.com/app/id1641134141">App Store</a>
-      <a class="alt" href="https://play.google.com/store/apps/details?id=com.sylv42240.watch_list">Google Play</a>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#"><b>WATCH</b> LIST</a>
+    <a class="opt" href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#nouveautes">Nouveautés</a>
+    <a class="opt" href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img src="logo.png" alt="Logo Watch List">
+  <h1>Tous vos films et séries,<br><span>une seule liste.</span></h1>
+  <p class="lead">Suivez ce que vous regardez, notez-le, gardez vos jours de suite et débloquez succès, avatars et parcours.</p>
+  <div class="stores">
+    <a class="btn" href="https://apps.apple.com/app/id1641134141">App Store</a>
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.sylv42240.watch_list">Google Play</a>
+  </div>
+  <div class="facts">
+    <div><i data-lucide="users"></i><b>500k+</b><span>utilisateurs</span></div>
+    <div><i data-lucide="star"></i><b>2 000+</b><span>avis sur les stores</span></div>
+    <div><i data-lucide="film"></i><b>1M+</b><span>films et séries</span></div>
+    <div><i data-lucide="heart"></i><b>Gratuit</b><span>et sans pub</span></div>
+  </div>
+</header>
+
+<main>
+<section id="fonctionnalites">
+  <div class="wrap">
+    <h2>Tout pour suivre <span>ce que vous regardez</span></h2>
+    <p class="sub">Films, séries, saisons, épisodes : tout au même endroit, sur téléphone comme sur tablette.</p>
+    <div class="grid">
+      <div class="card"><div class="ico"><i data-lucide="clapperboard"></i></div><h3>Votre Watch List</h3><p>À voir, en cours, vus. Cochez un épisode, une saison ou un film en un geste et reprenez là où vous en étiez.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="star"></i></div><h3>Notes et Top 5</h3><p>Notez en étoiles ou en chiffres, ou pas du tout. Classez vos 5 préférés et partagez-les.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="search"></i></div><h3>Découvrir</h3><p>Recherche avec filtres par genre et par année, tendances, top 10, recommandations tirées de vos goûts.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="tv"></i></div><h3>Où regarder</h3><p>Les plateformes qui proposent chaque titre dans votre pays, en streaming, location ou achat.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="bell"></i></div><h3>Rappels et sorties</h3><p>Une notification le jour de sortie d'un film ou d'une saison, et des rappels à l'heure de votre choix.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="flame"></i></div><h3>Jours de suite</h3><p>Regardez chaque jour pour faire grandir votre série et débloquer les flammes de 3, 7 et 30 jours.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="trophy"></i></div><h3>Succès et avatars</h3><p>Des succès en bronze, argent et or, et 69 avatars à débloquer pour personnaliser votre profil.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="chart-column"></i></div><h3>Statistiques et récap</h3><p>Heures de visionnage, genres préférés, activité, et un récap annuel en stories à partager.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="list"></i></div><h3>Listes perso</h3><p>Créez vos propres listes avec une icône et partagez-les par QR code ou par fichier.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="dices"></i></div><h3>Pas d'inspiration ?</h3><p>La roulette choisit pour vous un titre de votre liste quand vous n'arrivez pas à vous décider.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="cloud"></i></div><h3>Sauvegarde et synchro</h3><p>Vos listes sauvegardées dans le cloud et synchronisées entre vos appareils, ou exportées dans un fichier.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="eye-off"></i></div><h3>Anti-spoilers</h3><p>Masquez les titres et résumés des épisodes que vous n'avez pas encore vus.</p></div>
     </div>
-    <footer><a href="https://twitter.com/Watch_List_App">@Watch_List_App</a></footer>
-  </main>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <h2>Les <span>parcours</span></h2>
+    <p class="sub">Des sélections de films commentés, classés par niveau. Chaque parcours terminé débloque un avatar.</p>
+    <div class="chips">
+      <span>Les Chefs-d'œuvre de Pixar</span><span>La Magie de Ghibli</span><span>Le Cinéma de Nolan</span>
+      <span>L'Obsession Kubrick</span><span>L'Univers de Tarantino</span><span>Le Cinéma de Villeneuve</span>
+      <span>Le Monde de Wes Anderson</span><span>Le Mystère David Lynch</span><span>L'Univers des Frères Coen</span>
+      <span>La Nouvelle Vague</span><span>Le Nouvel Hollywood</span><span>Le Cinéma Coréen</span>
+      <span>Cinéma Contemplatif Asiatique</span><span>Science-Fiction Philosophique</span><span>Dystopies Modernes</span>
+      <span>L'Horreur Moderne</span><span>Thrillers Psychologiques</span><span>L'Art du Braquage</span>
+      <span>L'Appel de l'Aventure</span><span>Comédies Romantiques</span><span>Tom Hanks : L'Homme Héroïque</span>
+    </div>
+  </div>
+</section>
+
+<section id="nouveautes">
+  <div class="wrap changes">
+    <h2>Les <span>nouveautés</span></h2>
+    <p class="sub">Ce qui a changé dans chaque version de l'app.</p>
+
+    <!-- New version: copy this block on top, move the "Dernière version" tag to it, and turn the previous one into a <details class="release"> with a <summary>. -->
+    <article class="release">
+      <div class="head"><h3>4.0.8</h3><time datetime="2026-10-15">15 octobre 2026</time><span class="tag">Dernière version</span></div>
+      <ul>
+        <li>Récap annuel entièrement repensé, en stories animées</li>
+        <li>Date de visionnage oubliée ? Marquez-la comme inconnue : le titre reste vu, sans fausser vos stats</li>
+        <li>Logo de fête dans la barre pour Halloween, Noël et la Saint-Valentin</li>
+        <li>Thème clair plus chaleureux et nouveaux onglets en pilule</li>
+        <li>FAQ repensée avec une recherche par mots et de nouvelles questions</li>
+        <li>Vos listes sont mieux protégées lors de la synchronisation entre appareils</li>
+        <li>Réorganisation du Top 5 et des listes perso corrigée</li>
+        <li>Les rappels suivent leurs titres après une synchronisation et ne peuvent plus être programmés dans le passé</li>
+        <li>Le bouton « Ajouter » ne cache plus le dernier élément de vos listes</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </article>
+
+    <details class="release">
+      <summary><h3>4.0.7</h3><time datetime="2026-10-12">12 octobre 2026</time></summary>
+      <ul>
+        <li>Marquer une saison comme vue propose aussi de marquer les saisons précédentes</li>
+        <li>Films : plus d'étape « en cours », un seul geste pour marquer un film comme vu</li>
+        <li>Nouvelle barre de recherche sur l'accueil, pour les films comme pour les séries</li>
+        <li>La roulette « Pas d'inspiration ? » arrive sur l'accueil</li>
+        <li>Rappels proposés à 20 h par défaut, heure modifiable dans les paramètres</li>
+        <li>Nouveau bouton d'ajout, qui se replie quand on fait défiler</li>
+        <li>Fiches réorganisées : épisodes et casting avant les notes personnelles</li>
+        <li>Un film ou une saison déjà vu s'ouvre directement depuis la recherche</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.6</h3><time datetime="2026-10-08">8 octobre 2026</time></summary>
+      <ul>
+        <li>Nouveau design pour tablettes et téléphones pliables : menu latéral, liste et fiche côte à côte</li>
+        <li>Série de jours de visionnage : suivez vos jours de suite, avec un rappel le soir en option</li>
+        <li>Nouveaux avatars flamme à débloquer avec vos séries de 3, 7 et 30 jours</li>
+        <li>Nouvelle page de connexion</li>
+        <li>Un seul lien pour partager l'app, qui ouvre le bon store</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.5</h3><time datetime="2026-10-05">5 octobre 2026</time></summary>
+      <ul>
+        <li>Nouveau profil : avatar, ancienneté, succès, parcours, compte et paramètres au même endroit</li>
+        <li>69 avatars à débloquer avec les succès et les parcours terminés</li>
+        <li>Nom de profil modifiable</li>
+        <li>Notes facultatives : terminez un film ou une saison sans le noter</li>
+        <li>Badge « Dans votre Watch List » dans la recherche, les tendances et les filmographies</li>
+        <li>Recherches récentes sur les écrans de recherche</li>
+        <li>Paramètres réorganisés par sections, avec de nouvelles options : anti-spoilers, écran d'ouverture, style de notation, vibrations et cache</li>
+        <li>Top 5 repensé, avec des suggestions tirées de vos titres les mieux notés</li>
+        <li>FAQ mise à jour</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.4</h3><time datetime="2026-10-04">4 octobre 2026</time></summary>
+      <ul>
+        <li>Correction du blocage de l'application après le geste retour sur Android</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.3</h3><time datetime="2026-10-03">3 octobre 2026</time></summary>
+      <ul>
+        <li>Nouvelles langues : portugais (Brésil), italien et allemand</li>
+        <li>Titres et résumés dans la langue choisie, mise à jour dès qu'on la change</li>
+        <li>Nouveau geste retour sur Android</li>
+        <li>Nouvelles animations : barres de progression, notes, barre du bas</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.2</h3><time datetime="2026-09-30">30 septembre 2026</time></summary>
+      <ul>
+        <li>Thème Système, Clair ou Sombre, avec un sélecteur unique à drapeaux pour la langue, la région et le thème</li>
+        <li>Région au choix pour la disponibilité en streaming, avec indication quand les offres viennent d'un autre pays</li>
+        <li>Recherche : filtres par année et par genre (plusieurs genres possibles), défilement infini</li>
+        <li>Nouveau sélecteur d'année par décennie</li>
+        <li>Plus de recommandations à la découverte de l'app</li>
+        <li>L'accueil s'affiche dès qu'un titre est dans la liste, noté ou non</li>
+        <li>Bandeau hors-ligne, bouton « Réessayer » en cas d'erreur réseau et tirer pour rafraîchir</li>
+        <li>Nombre de filtres actifs affiché sur les listes Films et Séries</li>
+        <li>Nouvel en-tête des listes perso : mur d'affiches et éventail de posters</li>
+        <li>Illustrations animées pour tous les écrans vides et les images manquantes</li>
+        <li>Page « À propos de moi » refaite et application plus légère</li>
+        <li>Texte qui suit la taille de police du téléphone</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.1</h3><time datetime="2026-09-28">28 septembre 2026</time></summary>
+      <ul>
+        <li>Nouvelle découverte de l'app : mur d'affiches, choix des premiers titres à regarder, rappel de sortie</li>
+        <li>Écran Découvrir repensé : recherche en premier, top 10 films et séries, parcours, tendances et sorties</li>
+        <li>Accueil repensé : un seul fil films et séries (reprendre, à regarder ensuite, recommandations, Top 5)</li>
+        <li>Nouvelle page Statistiques</li>
+        <li>Astuces à la première utilisation</li>
+        <li>Nouveau fond lumineux sur Découvrir et les fiches films et séries</li>
+        <li>Titres et résumés dans la langue du téléphone quand l'app n'est pas traduite</li>
+        <li>Liens vers les stores ajoutés aux partages (Top 5, listes, récap annuel)</li>
+        <li>Statistiques d'usage soumises à votre accord, désactivées par défaut</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <details class="release">
+      <summary><h3>4.0.0</h3><time datetime="2026-09-26">26 septembre 2026</time></summary>
+      <ul>
+        <li>Nouveau design complet de l'app : profondeur, animations, thème clair plus lisible</li>
+        <li>Listes, grilles et fiches films et séries repensées</li>
+        <li>Sauvegarde automatique dans le cloud, synchronisée entre appareils</li>
+        <li>Export et import d'une sauvegarde complète dans un fichier</li>
+        <li>5 nouveaux parcours : Horreur moderne, Wes Anderson, Tarantino, Villeneuve, Kubrick</li>
+        <li>Démarrage plus rapide et application plus légère</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </details>
+
+    <div class="history">
+      <h3>Avant la 4.0</h3>
+      <div class="year"><b>2026</b><p>Historique de visionnage, sorties à venir, alertes de sortie, épisodes cochés un par un, version tablette, tendances séries.</p></div>
+      <div class="year"><b>2025</b><p>Nouvelle interface, parcours guidés, récap annuel, sagas, roulette, listes partagées par QR code, épingles.</p></div>
+      <div class="year"><b>2024</b><p>Listes perso partageables, fiches acteurs et réalisateurs, statistiques, nouveau logo.</p></div>
+      <div class="year"><b>2023</b><p>Succès, plateformes de streaming, tendances et recommandations, export de la liste, connexion Apple.</p></div>
+      <div class="year"><b>2022</b><p>Lancement de Watch List : suivi des films et séries, rappels, Top 5, sauvegarde avec un compte.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq">
+    <h2>Questions <span>fréquentes</span></h2>
+    <p class="sub">Les réponses complètes sont aussi dans l'app, dans la FAQ.</p>
+    <details><summary>L'application est-elle gratuite ?</summary><p>Oui, Watch List est gratuite et sans pub, sur iPhone, iPad et Android.</p></details>
+    <details><summary>Comment retrouver mes données sur un autre appareil ?</summary><p>Connectez-vous depuis Profil &gt; Mon compte : vos listes sont sauvegardées automatiquement dans le cloud et synchronisées entre vos appareils. Vous pouvez aussi exporter une sauvegarde dans un fichier depuis Paramètres &gt; Mes données.</p></details>
+    <details><summary>Puis-je regarder les films dans l'app ?</summary><p>Non. Watch List vous indique où chaque titre est disponible (Netflix, Prime Video…) mais ne diffuse pas de contenu.</p></details>
+    <details><summary>Puis-je l'utiliser sans internet ?</summary><p>Vous pouvez consulter vos listes hors ligne. La recherche et les tendances demandent une connexion.</p></details>
+    <details><summary>Que sont les parcours ?</summary><p>Des sélections thématiques de films commentés (Pixar, Ghibli, Nolan, Nouvelle Vague…), classés par niveau. Votre progression avance à chaque film vu, et terminer un parcours débloque un avatar.</p></details>
+    <details><summary>Comment fonctionne la série de jours ?</summary><p>Chaque jour où vous terminez un film ou une saison, ou cochez un épisode, compte. 3, 7 et 30 jours de suite débloquent des succès. Un rappel le soir peut être activé dans les paramètres.</p></details>
+    <details><summary>Comment supprimer mon compte ?</summary><p>Profil &gt; Mon compte &gt; Supprimer mon compte. Votre compte et vos sauvegardes dans le cloud sont supprimés définitivement.</p></details>
+    <details><summary>Comment vous contacter ?</summary><p>Depuis l'app, dans Paramètres &gt; À propos de l'app &gt; Envoyer un mail, ou sur <a href="https://twitter.com/Watch_List_App">@Watch_List_App</a>.</p></details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="https://twitter.com/Watch_List_App">@Watch_List_App</a>
+      <a href="https://ko-fi.com/watchlist">Soutenir sur Ko-fi</a>
+    </div>
+    <p>Films et séries fournis par <a href="https://www.themoviedb.org">TMDB</a>. Watch List utilise l'API TMDB sans être approuvée ni certifiée par TMDB.</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
