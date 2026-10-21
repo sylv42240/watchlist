@@ -44,7 +44,7 @@
   nav a:not(.brand):hover { color: var(--text); }
 
   .hero { text-align: center; padding: 64px 16px 40px; }
-  .hero img { width: 150px; max-width: 40vw; filter: drop-shadow(0 0 40px rgba(251,179,59,0.35)); }
+  .hero img { width: 150px; height: auto; max-width: 40vw; filter: drop-shadow(0 0 40px rgba(251,179,59,0.35)); }
   h1 { margin-top: 22px; font-size: clamp(34px, 7vw, 58px); font-weight: 800; line-height: 1.05; letter-spacing: -1px; }
   .lead { margin: 16px auto 0; max-width: 560px; font-size: 20px; color: var(--muted); }
   .stores { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -60,6 +60,8 @@
   .facts div { padding: 20px 12px; display: grid; justify-items: center; gap: 2px; }
   .facts div + div { border-left: 1px solid var(--line); }
   .facts svg { width: 20px; height: 20px; color: var(--accent); margin-bottom: 6px; }
+  /* Their room before Lucide draws them (no shift under an anchor). */
+  .facts i[data-lucide] { display: inline-block; width: 20px; height: 20px; margin-bottom: 6px; }
   .facts b { font-size: 26px; font-weight: 800; line-height: 1.1; }
   .facts span { font-size: 14px; color: var(--muted); }
 
@@ -128,7 +130,7 @@
 </nav>
 
 <header class="hero">
-  <img src="logo.png" alt="Logo Watch List">
+  <img src="logo.png" alt="Logo Watch List" width="725" height="425">
   <h1>Tous vos films et séries,<br><span>une seule liste.</span></h1>
   <p class="lead">Suivez ce que vous regardez, notez-le, gardez vos jours de suite et débloquez succès, avatars et parcours.</p>
   <div class="stores">
@@ -401,6 +403,16 @@
 </footer>
 
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
-<script>lucide.createIcons();</script>
+<script>
+  lucide.createIcons();
+  // Opened on an anchor (the app's "What's new" opens #nouveautes): the
+  // browser jumped there before the logo, the icons and the fonts took their
+  // room, and the section went further down. Back on it once all is laid out.
+  if (location.hash) {
+    const target = document.getElementById(location.hash.slice(1));
+    addEventListener("load", () => document.fonts.ready.then(() =>
+      target && target.scrollIntoView({ behavior: "instant" })));
+  }
+</script>
 </body>
 </html>
