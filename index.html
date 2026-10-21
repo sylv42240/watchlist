@@ -154,10 +154,10 @@
       <div class="card"><div class="ico"><i data-lucide="clapperboard"></i></div><h3>Votre Watch List</h3><p>À voir, en cours, vus. Cochez un épisode, une saison ou un film en un geste et reprenez là où vous en étiez.</p></div>
       <div class="card"><div class="ico"><i data-lucide="star"></i></div><h3>Notes et Top 5</h3><p>Notez en étoiles ou en chiffres, ou pas du tout. Classez vos 5 préférés et partagez-les.</p></div>
       <div class="card"><div class="ico"><i data-lucide="search"></i></div><h3>Découvrir</h3><p>Recherche avec filtres par genre et par année, tendances, top 10, recommandations tirées de vos goûts.</p></div>
-      <div class="card"><div class="ico"><i data-lucide="tv"></i></div><h3>Où regarder</h3><p>Les plateformes qui proposent chaque titre dans votre pays, en streaming, location ou achat.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="tv"></i></div><h3>Où regarder</h3><p>Directement sur la fiche : les plateformes qui proposent chaque titre dans votre pays, gratuitement, en abonnement, en location ou à l'achat.</p></div>
       <div class="card"><div class="ico"><i data-lucide="bell"></i></div><h3>Rappels et sorties</h3><p>Une notification le jour de sortie d'un film ou d'une saison, et des rappels à l'heure de votre choix.</p></div>
       <div class="card"><div class="ico"><i data-lucide="flame"></i></div><h3>Jours de suite</h3><p>Regardez chaque jour pour faire grandir votre série et débloquer les flammes de 3, 7 et 30 jours.</p></div>
-      <div class="card"><div class="ico"><i data-lucide="trophy"></i></div><h3>Succès et avatars</h3><p>Des succès en bronze, argent et or, et 69 avatars à débloquer pour personnaliser votre profil.</p></div>
+      <div class="card"><div class="ico"><i data-lucide="trophy"></i></div><h3>Succès et avatars</h3><p>Des succès en bronze, argent et or, et 73 avatars à débloquer pour personnaliser votre profil.</p></div>
       <div class="card"><div class="ico"><i data-lucide="chart-column"></i></div><h3>Statistiques et récap</h3><p>Heures de visionnage, genres préférés, activité, et un récap annuel en stories à partager.</p></div>
       <div class="card"><div class="ico"><i data-lucide="list"></i></div><h3>Listes perso</h3><p>Créez vos propres listes avec une icône et partagez-les par QR code ou par fichier.</p></div>
       <div class="card"><div class="ico"><i data-lucide="dices"></i></div><h3>Pas d'inspiration ?</h3><p>La roulette choisit pour vous un titre de votre liste quand vous n'arrivez pas à vous décider.</p></div>
@@ -170,7 +170,7 @@
 <section id="parcours">
   <div class="wrap">
     <h2>Les <span>parcours</span></h2>
-    <p class="sub">Des sélections de films commentés, classés par niveau. Chaque parcours terminé débloque un avatar.</p>
+    <p class="sub">Des sélections de films commentés, classés par niveau. Suivez-en un, avancez sur sa carte, et chaque parcours terminé débloque un avatar.</p>
     <div class="chips">
       <span>Les Chefs-d'œuvre de Pixar</span><span>La Magie de Ghibli</span><span>Le Cinéma de Nolan</span>
       <span>L'Obsession Kubrick</span><span>L'Univers de Tarantino</span><span>Le Cinéma de Villeneuve</span>
@@ -179,6 +179,7 @@
       <span>Cinéma Contemplatif Asiatique</span><span>Science-Fiction Philosophique</span><span>Dystopies Modernes</span>
       <span>L'Horreur Moderne</span><span>Thrillers Psychologiques</span><span>L'Art du Braquage</span>
       <span>L'Appel de l'Aventure</span><span>Comédies Romantiques</span><span>Tom Hanks : L'Homme Héroïque</span>
+      <span>Star Wars dans l'Ordre</span><span>Scorsese : Mafia et Remords</span><span>Palmes d'Or du XXIe Siècle</span>
     </div>
   </div>
 </section>
@@ -190,7 +191,18 @@
 
     <!-- New version: copy this block on top, move the "Dernière version" tag to it, and turn the previous one into a <details class="release"> with a <summary>. -->
     <article class="release">
-      <div class="head"><h3>4.1.1</h3><time datetime="2026-10-19">19 octobre 2026</time><span class="tag">Dernière version</span></div>
+      <div class="head"><h3>4.1.2</h3><time datetime="2026-10-21">21 octobre 2026</time><span class="tag">Dernière version</span></div>
+      <ul>
+        <li>Suivez un parcours et sa progression sur une nouvelle carte</li>
+        <li>3 nouveaux parcours : Star Wars, Scorsese et les Palmes d'Or</li>
+        <li>Où regarder, directement sur la fiche</li>
+        <li>Nouvel historique de visionnage</li>
+        <li>Petites corrections et améliorations</li>
+      </ul>
+    </article>
+
+    <details class="release">
+      <summary><h3>4.1.1</h3><time datetime="2026-10-19">19 octobre 2026</time></summary>
       <ul>
         <li>Réorganisez vos listes : appui long puis glissez</li>
         <li>Retirez la note d'un film ou d'une saison déjà noté</li>
@@ -198,7 +210,7 @@
         <li>Titres et résumés en anglais quand votre langue est peu traduite</li>
         <li>Petites corrections et améliorations</li>
       </ul>
-    </article>
+    </details>
 
     <details class="release">
       <summary><h3>4.1.0</h3><time datetime="2026-10-18">18 octobre 2026</time></summary>
@@ -368,7 +380,7 @@
     <details><summary>Puis-je importer mon historique TV Time, Letterboxd ou IMDb ?</summary><p>Oui. Dans Paramètres &gt; Mes données &gt; Importer depuis une autre app, choisissez le fichier d'export (.zip, .csv ou .json) : films, séries, épisodes vus, notes et liste à voir sont récupérés. Les titres déjà dans votre Watch List sont complétés, jamais dupliqués.</p></details>
     <details><summary>Puis-je regarder les films dans l'app ?</summary><p>Non. Watch List vous indique où chaque titre est disponible (Netflix, Prime Video…) mais ne diffuse pas de contenu.</p></details>
     <details><summary>Puis-je l'utiliser sans internet ?</summary><p>Vous pouvez consulter vos listes hors ligne. La recherche et les tendances demandent une connexion.</p></details>
-    <details><summary>Que sont les parcours ?</summary><p>Des sélections thématiques de films commentés (Pixar, Ghibli, Nolan, Nouvelle Vague…), classés par niveau. Votre progression avance à chaque film vu, et terminer un parcours débloque un avatar.</p></details>
+    <details><summary>Que sont les parcours ?</summary><p>Des sélections thématiques de films commentés (Pixar, Ghibli, Nolan, Star Wars, Nouvelle Vague…), classés par niveau. Suivez-en un : il s'affiche en haut des parcours et sur l'accueil, avec le prochain film à voir. Votre progression avance à chaque film vu, et terminer un parcours débloque un avatar.</p></details>
     <details><summary>Comment fonctionne la série de jours ?</summary><p>Chaque jour où vous terminez un film ou une saison, ou cochez un épisode, compte. 3, 7 et 30 jours de suite débloquent des succès. Un rappel le soir peut être activé dans les paramètres.</p></details>
     <details><summary>Comment supprimer mon compte ?</summary><p>Profil &gt; Mon compte &gt; Supprimer mon compte. Votre compte et vos sauvegardes dans le cloud sont supprimés définitivement.</p></details>
     <details><summary>Comment vous contacter ?</summary><p>Depuis l'app, dans Paramètres &gt; À propos de l'app &gt; Envoyer un mail, ou sur <a href="https://twitter.com/Watch_List_App">@Watch_List_App</a>.</p></details>
