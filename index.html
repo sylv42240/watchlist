@@ -190,7 +190,7 @@
     <h2>Les <span>nouveautés</span></h2>
     <p class="sub">Ce qui a changé dans chaque version de l'app.</p>
 
-    <!-- New version: copy this block on top, move the "Dernière version" tag to it, and turn the previous one into a <details class="release"> with a <summary>. -->
+    <!-- New version: copy this block on top, move the "Dernière version" tag to it, and turn the previous one into a <details class="release"> with a <summary>. Keep the version alone in each <h3>: on a phone, the versions its store does not have yet are hidden (versions.json, see the script at the end). -->
     <article class="release">
       <div class="head"><h3>4.1.9</h3><time datetime="2026-11-23">23 novembre 2026</time><span class="tag">Dernière version</span></div>
       <ul>
@@ -478,6 +478,44 @@
 
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 <script>
+  // A phone doesn't see the notes of a version its store doesn't have yet
+  // (versions.json: the version live on each store, from the start of its
+  // rollout, refreshed hourly by .github/workflows/store-versions.yml).
+  // Computers, unknown platforms or no file: every version. The newest one
+  // shown gets the "Dernière version" tag, opened.
+  (async () => {
+    const ua = navigator.userAgent;
+    const os = /Android/i.test(ua) ? "android"
+      : /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? "ios"
+      : null;
+    if (!os) return;
+    let live;
+    try {
+      live = (await (await fetch("versions.json", { cache: "no-store" })).json())[os];
+    } catch { return; }
+    if (!/^\d+(\.\d+)+$/.test(live || "")) return;
+    const parts = (v) => v.split(".").map(Number);
+    const newer = (a, b) => {
+      const x = parts(a), y = parts(b);
+      for (let i = 0; i < Math.max(x.length, y.length); i++) {
+        if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
+      }
+      return false;
+    };
+    const shown = [...document.querySelectorAll("#nouveautes .release")].filter((release) => {
+      const version = release.querySelector("h3")?.textContent.trim() || "";
+      const hide = /^\d+(\.\d+)+$/.test(version) && newer(version, live);
+      if (hide) release.style.display = "none";
+      return !hide;
+    });
+    const latest = shown[0];
+    const tag = document.querySelector("#nouveautes .tag");
+    if (latest && latest.tagName === "DETAILS" && tag) {
+      latest.open = true;
+      latest.querySelector("summary").appendChild(tag);
+    }
+  })();
+
   lucide.createIcons();
   // Opened on an anchor (the app's "What's new" opens #nouveautes): the
   // browser jumped there before the logo, the icons and the fonts took their
